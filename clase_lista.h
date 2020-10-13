@@ -9,8 +9,8 @@ class lista{
 	lista() { primero = NULL; }
 		
 	lista lista_paises(string nombre);
-	lista lista_ciudades(string nombre);
-	lista lista_conexiones(string nombre);
+	void lista_ciudades(string nombre);
+	void lista_conexiones(string nombre);
 	lista lista_tipo_trenes(string nombre);
 	lista lista_trenes(string nombre);
 	lista lista_rutas(string nombre);
@@ -117,7 +117,7 @@ lista lista::lista_paises(string nombre)
 	return lista_paises;
 }
 
-lista lista::lista_ciudades(string nombre)
+void lista::lista_ciudades(string nombre)
 {
 	lista lista_ciudades;
 	FILE *archivo;
@@ -182,7 +182,7 @@ lista lista::lista_ciudades(string nombre)
 						
 						nuevo->anterior=nuevo;
      					nuevo->siguiente=nuevo;
-     					lista_ciudades.InsertarFinalciudad(codigo_pais, codigo_ciudad, nombre_ciudad);
+     					
      					break;
 					}					
 					
@@ -192,7 +192,7 @@ lista lista::lista_ciudades(string nombre)
     					nuevo->siguiente= aux2->anterior->siguiente;
     				    aux2->anterior->siguiente=nuevo;
      					aux2->anterior=nuevo;	
-     					lista_ciudades.InsertarFinalciudad(codigo_pais, codigo_ciudad, nombre_ciudad);
+     					
      					break;
 					}
 					
@@ -213,7 +213,7 @@ lista lista::lista_ciudades(string nombre)
     								nuevo->siguiente= aux2->anterior->siguiente;
     				    			aux2->anterior->siguiente=nuevo;
      								aux2->anterior=nuevo;	
-     								lista_ciudades.InsertarFinalciudad(codigo_pais, codigo_ciudad, nombre_ciudad);
+     								
 									break;
 								}
 								
@@ -238,7 +238,7 @@ lista lista::lista_ciudades(string nombre)
 						
 						nuevo->anterior=nuevo;
      					nuevo->siguiente=nuevo;
-     					lista_ciudades.InsertarFinalciudad(codigo_pais, codigo_ciudad, nombre_ciudad);
+     					
      					break;
 					}					
 					
@@ -248,7 +248,7 @@ lista lista::lista_ciudades(string nombre)
     					nuevo->siguiente= aux2->anterior->siguiente;
     				    aux2->anterior->siguiente=nuevo;
      					aux2->anterior=nuevo;	
-     					lista_ciudades.InsertarFinalciudad(codigo_pais, codigo_ciudad, nombre_ciudad);
+     					
      					break;
 					}
 					
@@ -269,7 +269,7 @@ lista lista::lista_ciudades(string nombre)
     								nuevo->siguiente= aux2->anterior->siguiente;
     				    			aux2->anterior->siguiente=nuevo;
      								aux2->anterior=nuevo;	
-     								lista_ciudades.InsertarFinalciudad(codigo_pais, codigo_ciudad, nombre_ciudad);
+     								
 									break;
 								}
 								
@@ -300,13 +300,14 @@ lista lista::lista_ciudades(string nombre)
 	}
 	
 	fclose(archivo);
-	return lista_ciudades;
+
 }
 	
 	
 	
-lista lista::lista_conexiones(string nombre);
+void lista::lista_conexiones(string nombre)
 {
+
 	lista lista_ciudades;
 	FILE *archivo;
 	
@@ -322,7 +323,7 @@ lista lista::lista_conexiones(string nombre);
 	
 	string codigo_pais_destino;
 	
-	string codigo_ciudad-destino;
+	string codigo_ciudad_destino;
 	
 	string tiempo;
 	
@@ -389,10 +390,10 @@ lista lista::lista_conexiones(string nombre);
 				codigo_ciudad_origen = codigo_ciudad_origen + c;
 			}
 		
-			pnodo nuevo = new nodo_destino(codigo_pais_origen, codigo_ciudad_origen, codigo_conexion, codigo_pais_destino, codigo_ciudad_destino, tiempo);
+			pnodo_destinos nuevo = new nodo_destinos(codigo_pais_origen, codigo_ciudad_origen, codigo_conexion, codigo_pais_destino, codigo_ciudad_destino, tiempo);
 
 		
-			pnodo aux = lista_paises.primero;
+			pnodo_destinos aux = lista_paises.primero;
 			
 			while(aux->siguiente != lista_paises.primero)
 			{
@@ -402,58 +403,174 @@ lista lista::lista_conexiones(string nombre);
 					
 					while(aux2->siguiente != aux->ciudad)
 					{
-						if(nuevo->codigo_ciudad == aux2->codigo_ciudad)
+						if(nuevo->codigo_ciudad_origen == aux2->codigo_ciudad)
 						{
-							if(aux2->conexion == NULL)
-							{
-								
-								
-							}
+							pnodo_destinos aux3 = aux2->conexion;
 							
-							else if(aux2->conexion->siguiente == aux2->siguiente)
+							if(aux3->conexion == NULL)
 							{
-								
+								aux2->conexion = nuevo;
+								nuevo->ciudad = aux2;
+								break;
 								
 							}
 							
 							else
 							{
+								while(aux3->siguiente != NULL)
+								{
+									if(nuevo->codigo_conexion == aux3->codigo_conexion)
+									{
+										break;
+									}
+									
+									aux3 = aux3->siguiente;
+								}
 								
+								if(aux3->siguiente == NULL)
+									{
+										if(nuevo->codigo_conexion == aux3->codigo_conexion)
+										{
+											break;
+										}
+										
+										else
+										{
+											aux3->siguiente = nuevo;
+											aux3->siguiente->anterior = aux3;
+											break;	
+											
+										}
+										
+									}	
+							}
+					
+						}
+						aux2 = aux2->siguiente;
+						if(aux2->siguiente == aux->ciudad)
+						{
+							if(nuevo->codigo_ciudad_origen == aux2->codigo_ciudad)
+						{
+							pnodo_destinos aux3 = aux2->conexion;
+							
+							if(aux3->conexion == NULL)
+							{
+								aux2->conexion = nuevo;
+								nuevo->ciudad = aux2;
 								
 							}
-			
+							
+							else
+							{
+								while(aux3->siguiente != NULL)
+								{
+									if(nuevo->codigo_conexion == aux3->codigo_conexion)
+									{
+										break;
+									}
+									
+									aux3 = aux3->siguiente;
+								}
 								
+								if(aux3->siguiente == NULL)
+									{
+										if(nuevo->codigo_conexion == aux3->codigo_conexion)
+										{
+											break;
+										}
+										
+										else
+										{
+											aux3->siguiente = nuevo;
+											aux3->siguiente->anterior = aux3;
+											break;	
+											
+										}
+										
+									}	
+							}
+					
 						}
-						aux2 = aux2->siguiente
+						}
 						
-						//repetir
 					}
 				
 				}
-		
-		
 				aux = aux->siguiente;
+			}
 				
-				//repetir
-			}
-	}		
-	else
-	{
+				if(aux->siguiente == lista_paises.primero)
+				{
+					if(nuevo->codigo_pais == aux->codigo_pais)
+				{
+					pnodo_destinos aux2 = aux->ciudad;
+					
+					while(aux2->siguiente != aux->ciudad)
+					{
+						if(nuevo->codigo_ciudad_origen == aux2->codigo_ciudad)
+						{
+							pnodo_destinos aux3 = aux2->conexion;
+							
+							if(aux3->conexion == NULL)
+							{
+								aux2->conexion = nuevo;
+								nuevo->ciudad = aux2;
+								break;
+								
+							}
+							
+							else
+							{
+								while(aux3->siguiente != NULL)
+								{
+									if(nuevo->codigo_conexion == aux3->codigo_conexion)
+									{
+										break;
+									}
+									
+									aux3 = aux3->siguiente;
+								}
+								
+								if(aux3->siguiente == NULL)
+									{
+										if(nuevo->codigo_conexion == aux3->codigo_conexion)
+										{
+											break;
+										}
+										
+										else
+										{
+											aux3->siguiente = nuevo;
+											aux3->siguiente->anterior = aux3;
+											break;	
+											
+										}
+									}	
+							}
+						}
+						aux2 = aux2->siguiente;						
+					}
+				}	
+				}			
+		}		
+		else
+		{
+			codigo_pais_origen = codigo_pais_origen + c;
 	
-	codigo_pais_origen = codigo_pais_origen + c;
+				if (feof(archivo))
+				{
+            		break;
+				}
+		}	
+		fclose(archivo);
 	
-			if (feof(archivo))
-			{
-            	break;
-			}
-	}	
-
-	
-	fclose(archivo);
-	return lista_conexiones;	
+	}
 }
-
-
+lista lista::lista_tipo_trenes(string nombre)
+{
+	
+	
+}
 
 
 
