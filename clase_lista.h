@@ -15,11 +15,10 @@ class lista{
 	lista lista_trenes(string nombre);
 	lista lista_rutas(string nombre);
 	
+	void InsertarFinal(string codpais, string nombrepais);
+	void InsertarFinalciudad(string codpais, string codciudad, string nombreciudad);
 	
-	
-	int submain();
-	lista leerarch();
-	
+	int largoLista();
 	
 	pnodo_destinos primero;
 	pnodo_trenes primero_;
@@ -27,24 +26,6 @@ class lista{
 	friend class listaDC;
 
 };
-
-int lista::submain()
-{
-	int pos = 0;
-	while(pos <= 8)
-	{
-		
-		
-	}
-	
-}
-
-lista lista::leerarch()
-{
-	
-	
-	
-}
 
 
 lista lista::lista_paises(string nombre)
