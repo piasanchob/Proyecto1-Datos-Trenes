@@ -28,6 +28,7 @@ lista lista_tipotren; // doble
 lista lista_trenes; // simple
 lista lista_ususarios; // doble
 
+
 int main(){
 	
 	Usuario user;
@@ -46,6 +47,7 @@ int main(){
 	}
 	cin.get();
 	return 0;
+	
 }
 	
 	

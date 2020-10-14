@@ -57,4 +57,4 @@ class nodo_trenes{
 	friend class insercion;
 };
 
-typedef nodo_trenes *pnodo_;
+typedef nodo_trenes *pnodo_trenes;

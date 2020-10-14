@@ -1,7 +1,7 @@
 // Métodos de creación de listas
 #include "clase_trenes.h"
 #include "Listadoblecircular.h"
-//#include "clase_insercion.cpp"
+
 class lista{
 	
 	public:
@@ -17,16 +17,35 @@ class lista{
 	
 	
 	
-	/*
-	void insertar_doble_circular_pais(pnodo nodo);
-	void insertar_nodo_ciudad(pnodo nodo);
-	void insertar_nodo_conexion(pnodo nodo);
-	*/
+	int submain();
+	lista leerarch();
+	
+	
 	pnodo_destinos primero;
+	pnodo_trenes primero_;
 	
 	friend class listaDC;
 
 };
+
+int lista::submain()
+{
+	int pos = 0;
+	while(pos <= 8)
+	{
+		
+		
+	}
+	
+}
+
+lista lista::leerarch()
+{
+	
+	
+	
+}
+
 
 lista lista::lista_paises(string nombre)
 {
@@ -566,516 +585,77 @@ void lista::lista_conexiones(string nombre)
 	
 	}
 }
+
 lista lista::lista_tipo_trenes(string nombre)
 {
+	lista lista_tipo_trenes;
 	
-	
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	/*
-						int cont = 0;
-			
-						if(lista_ciudades.largoLista() == 0)
-						{
-						lista_ciudades.InsertarFinalciudad(codigo_pais, codigo_ciudad, nombre_ciudad);
-							break;
-						}
-			
-						else
-						{
-			
-						while(cont != lista_ciudades.largoLista())
-						{
-							if(nuevo->codigo_ciudad == aux->codigo_ciudad)
-							{
-								break;
-							}
-				
-							else
-							{
-								cont++;
-								if(cont == lista_ciudades.largoLista())
-								{
-									lista_ciudades.InsertarFinalciudad(codigo_pais, codigo_ciudad, nombre_ciudad);
-									break;
-								}
-							
-							}				
-						}
-						}
-				}
-				else
-				{
-					aux = aux->siguiente;
-					
-				}
-				
-			}
-			
-			if (feof(archivo))
-			{
-            	break;
-			}
-			
-		}
-		else
-		{
-		
-			codigo_pais = codigo_pais + c;
-			continue;
-			
-		}
-	}
-			fclose(archivo);
-			return lista_ciudades;
-	
-}
-
-
-
-*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-void lista::insertar_doble_circular_pais(pnodo nodo)
-{
-			if (ListaVacia())
-			{
-				primero = nodo;
-				primero->anterior = primero;
-				primero->siguiente = primero;
-			}
-			else
-			{
-				
-				while(true)
-				{
-				
-				pnodo nuevo = nodo;
-				cout << lista_paises.primero;
-				//pnodo aux = lista_paises.primero;
-				
-				
-				
-					if(nuevo->codigo_pais == aux->codigo_pais)
-					{
-						break;
-					}
-				
-					else if(aux->siguiente == lista_paises.primero)
-					{
-						nuevo->anterior = primero->anterior;
-     					nuevo->siguiente=primero->anterior->siguiente;
-     					primero->anterior->siguiente=nuevo;
-     					primero->anterior=nuevo;
-     					break;
-					}
-				
-					else
-					{
-					
-						while(aux->siguiente != lista_paises.primero)
-						{
-							if(nuevo->codigo_pais == aux->siguiente->codigo_pais)
-							{
-							break;
-							}
-							else
-							{
-								aux->anterior = aux;
-								aux = aux->siguiente;
-								if(aux->siguiente == lista_paises.primero)
-								{
-									nuevo->anterior = primero->anterior;
-     								nuevo->siguiente=primero->anterior->siguiente;
-     								primero->anterior->siguiente=nuevo;
-     								primero->anterior=nuevo;
-									break;	
-								
-								}
-							}
-				
-						}
-						
-						break;
-					}	
-				}
-     		}	
-}
-
-lista lista::lista_ciudades(string nombre)
-{
-	lista lista_ciudades;
 	FILE *archivo;
-	
+		
 	string c;
 	
 	archivo = fopen(nombre.c_str(), "r");
 	
-	string codigo_pais;
+	string codigo_tipo_tren;
 	
-	string codigo_ciudad;
-	
-	string nombre_ciudad;
-	
-	while(true)
-	{	
-		
-		c = fgetc(archivo);
-		
-		if (c == ";")
-		{
-			while(true)
-			{
-				
-				c = fgetc(archivo);
-				
-				if(c == ";")
-				{
-					while(true)
-		 			{
-		 				if (c == "\n")
-				 		{
-		 					break;
-				 		}
-				 		
-				 		c = fgetc(archivo);
-		 				nombre_ciudad = nombre_ciudad + c;
-				 		
-				 	}
-		 			
-		 			break;
-				}
-				
-				codigo_ciudad = codigo_ciudad + c;
-				
-			}
-			
-			pnodo nuevo = new nodo_destino(codigo_pais, codigo_ciudad, nombre_ciudad);
-			insertar_nodo_ciudad(nuevo);
-			//lista de ciudades
-			//hacerlistaciudades();
-			
-		
-			
-
-			
-			if (feof(archivo))
-			{
-            	break;
-			}
-			
-		}
-			codigo_pais = codigo_pais + c;
-			continue;	
-	}
-			fclose(archivo);
-			return lista_ciudades;
-	
-}
-
-void lista::insertar_nodo_ciudad(pnodo nodo)
-{
-
-	pnodo primero_pais = lista_paises.primero;
-	pnodo aux = primero_pais;
-	
-	
-	while(aux->siguiente != primero_pais)
-	{
-		if(nodo->codigo_pais == aux->codigo_pais)
-		{
-			if (aux->ciudad == NULL)
-			{
-				pnodo primero_ciudad = nodo;
-				
-				aux->ciudad = primero_ciudad;
-				primero_ciudad->pais = aux;
-				
-				primero_ciudad->siguiente = primero_ciudad;
-				primero_ciudad->anterior = primero_ciudad;
-				break;
-			}
-			else if(primero_ciudad->siguiente == primero_ciudad)
-			{
-				if(nodo->codigo_ciudad == primero_ciudad->codigo_ciudad)
-				{
-					break;
-				}
-				else
-				{
-						nodo->anterior = primero_ciudad->anterior;
-     					nodo->siguiente=primero_ciudad->anterior->siguiente;
-     					primero_ciudad->anterior->siguiente=nodo;
-     					primero_ciudad->anterior=nodo;	
-     					break;
-				}
-				
-			}
-			else
-			{
-				pnodo aux2 = primero_ciudad;
-				
-				while(aux2->siguiente != primero_ciudad)
-				{
-					if(nodo->codigo_ciudad == aux2->codigo_ciudad)
-					{
-					break;
-					}
-					
-					else
-					{
-						aux2->anterior = aux;
-						aux2 = aux2->siguiente;	
-					}
-				}
-				
-				if(nodo->codigo_ciudad == aux2->codigo_ciudad)
-				{
-				break;
-				}
-				
-				else
-				{
-					nodo->anterior = aux2->anterior;
-     				nodo->siguiente=aux2->anterior->siguiente;
-     				aux2->anterior->siguiente=nodo;
-     				aux2->anterior=nodo;	
-     				break;
-				}	
-				
-			}
-		}
-		else
-		{	aux->anterior = aux;
-			aux = aux->siguiente;
-			
-			if(aux->siguiente == primero_pais)	
-			{
-				if(nodo->codigo_pais == aux->codigo_pais)
-		{
-			if (aux->ciudad == NULL)
-			{
-				pnodo primero_ciudad = nodo;
-				
-				aux->ciudad = primero_ciudad;
-				primero_ciudad->pais = aux;
-				
-				primero_ciudad->siguiente = primero_ciudad;
-				primero_ciudad->anterior = primero_ciudad;
-				break;
-			}
-			else if(primero_ciudad->siguiente == primero_ciudad)
-			{
-				if(nodo->codigo_ciudad == primero_ciudad->codigo_ciudad)
-				{
-					break;
-				}
-				else
-				{
-						nodo->anterior = primero_ciudad->anterior;
-     					nodo->siguiente=primero_ciudad->anterior->siguiente;
-     					primero_ciudad->anterior->siguiente=nodo;
-     					primero_ciudad->anterior=nodo;
-						 break;	
-				}
-				
-			}
-			else
-			{
-				pnodo aux2 = primero_ciudad;
-				
-				while(aux2->siguiente != primero_ciudad)
-				{
-					if(nodo->codigo_ciudad == aux2->codigo_ciudad)
-					{
-					break;
-					}
-					
-					else
-					{
-						aux2->anterior = aux;
-						aux2 = aux2->siguiente;	
-					}
-				}
-				
-				if(nodo->codigo_ciudad == aux2->codigo_ciudad)
-				{
-				break;
-				}
-				
-				else
-				{
-					nodo->anterior = aux2->anterior;
-     				nodo->siguiente=aux2->anterior->siguiente;
-     				aux2->anterior->siguiente=nodo;
-     				aux2->anterior=nodo;
-					 break;	
-				}	
-				
-			}
-		}
-			}
-		}
-	}
-}
-	
-		
-	
-
-lista lista::lista_conexiones(string nombre)
-{
-	lista lista_conexiones;
-	FILE *archivo;
-	
-	string c;
-	
-	archivo = fopen(nombre.c_str(), "r");
-	
-	string codigo_pais_origen;
-	
-	string codigo_ciudad_origen;
-	
-	string codigo_conexion;
-	
-	string codigo_pais_destino;
-	
-	string codigo_ciudad_destino;
-	
-	string tiempo;
-	
+	string nombre_tipo_tren;
 	
 	while(true)
 	{
-
 		c = fgetc(archivo);
 		
-		if (c == ";")
+		if(c == ";")
 		{
 			while(true)
 			{
 				c = fgetc(archivo);
 				
-				if(c == ";")
+				if(c == "\n")
 				{
-					while(true)
-					{
-						c = fgetc(archivo);
-						
-						if(c == ";")
-						{
-							while(true)
-							{
-								c = fgetc(archivo);
-								
-								if(c == ";")
-								{
-									while(true)
-									{
-										c = fgetc(archivo);
-										
-										if(c == ";")
-										{
-											while(true)
-											{
-												c = fgetc(archivo);
-												
-												if(c == "\n")
-												{
-													break;
-												}
-												
-												tiempo = tiempo + c;
-												
-											}
-											break;
-										}	
-										codigo_ciudad_destino = codigo_ciudad_destino + c;
-									}
-									break;
-								}
-								
-								codigo_pais_destino = codigo_pais_destino + c;
-							}	
-							break;
-						}
-						
-						codigo_conexion = codigo_conexion + c;
-					}
 					break;
+					
 				}
-				
-				codigo_ciudad_origen = codigo_ciudad_origen + c;
+				nombre_tipo_tren = nombre_tipo_tren + c;
 			}
-		
-			pnodo nuevo = new nodo_destino(codigo_pais_origen, codigo_ciudad_origen, codigo_conexion, codigo_pais_destino, codigo_ciudad_destino, tiempo);
-			lista_ciudades.insertar_doble_circular_ciudad(nuevo);
 			
-			if (feof(archivo))
-			{
-            	break;
-			}
-		
+			break;
 		}
-	
-	codigo_pais_origen = codigo_pais_origen + c;
-	
-	continue;
+		
+		codigo_tipo_tren = codigo_tipo_tren + c;
 	}
+	
+	pnodo_trenes nuevo = new nodo_trenes(codigo_tipo_tren, nombre_tipo_tren);
+	pnodo_trenes aux = lista_trenes.primero_;
+	while(true)
+	{
+		
+	if(lista_trenes.primero_ == NULL)
+	{
+		lista_tipo_trenes.InsertarFinalD(codigo_tipo_tren, nombre_tipo_tren); 
+		break;	
+	}
+	
+	else 
+	{	while(aux->siguiente != NULL)
+		{
+			if(nuevo->codigo_tipo_tren == aux->codigo_tipo_tren)
+			{
+				break;
+			}
+			aux = aux->siguiente;	
+		}
+		
+		if(aux->siguiente == NULL && nuevo->codigo_tipo_tren != aux->codigo_tipo_tren)
+		{
+			lista_tipo_trenes.InsertarFinalD(codigo_tipo_tren, nombre_tipo_tren); 	
+			break;
+		}
+		break;
+	
+	}
+	}
+	
 	fclose(archivo);
-	return lista_conexiones;
-	
+	return lista_tipo_trenes;
 }
-
-void lista::insertar_nodo_conexiones()
-{
-	
-	
-	
-	
-}
-*/
 

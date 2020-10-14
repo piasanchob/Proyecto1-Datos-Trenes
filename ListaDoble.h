@@ -1,4 +1,5 @@
 #include "clase_destinos.h"
+#include "clase_trenes.h"
 using namespace std;
 
 typedef nodo_destinos *pnodo_destinos;
@@ -9,7 +10,7 @@ class listaD {
     ~listaD();
     
     void InsertarInicio(int v);
-    void InsertarFinal(int v);
+    void InsertarFinalD(string codigo_tipo_tren, string nombre_tipo_tren);
     void InsertarPos (int v, int pos);
     bool ListaVacia() { return primero == NULL; } 
     void Borrar(int v);
@@ -67,19 +68,18 @@ void listaD::InsertarInicio(int v)
    }
 }
  
-void listaD::InsertarFinal(int v)
+void listaD::InsertarFinalD(string codigo_tipo_tren, string nombre_tipo_tren)
 {
    if (ListaVacia())
    {
    
-     primero = new nodo(v);
-     primero->anterior=NULL;     
+     primero_ = new nodo(codigo_tipo_tren, nombre_tipo_tren);
+     primero_->anterior=NULL;     
    }
    else
-     { pnodo aux = primero;
-        while ( aux->siguiente != NULL)
-          aux= aux->siguiente;
-        aux->siguiente=new nodo(v);
+     { pnodo_trenes aux = primero_;
+
+        aux->siguiente=new nodo(codigo_tipo_tren, nombre_tipo_tren);
         aux->siguiente->anterior=aux;       
       }    
 }
